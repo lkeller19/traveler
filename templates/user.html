@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ posts[0]["username"] }}
+{% endblock %}
+
+{% block main %}
+    <br><br>
+    {% for image in posts | reverse %}
+        <div class="card solo">
+          <div style="display:inline-block;">
+              <a class="user" href="{{ url_for('user', username=image['username']) }}">
+          <div class="card-header mr-auto" style="float: left">
+            {{ image["username"] }}
+          </div>
+          </a>
+          <div class="card-header ml-auto date" style="float: right;">
+            {{ image["time"] | date }}
+          </div>
+          </div>
+          <img class="card-img-top" src="/static/uploads/{{ image["name"] }}" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-text">{{ image["location"] }}, {{ image["country"] }}</h4>
+                  <div style="display:inline;">
+                  {% if image["user_id"] != current_user %}
+                      {% for like in likes if like['post_id'] == image['id'] and like['user_id'] == current_user %}
+                              <input type="button" post_id="{{ image['id'] }}" id="update{{ image['id'] }}" value="UNLIKE" class="active game"/>
+                      {% else %}
+                              <input type="button" post_id="{{ image['id'] }}" id="update{{ image['id'] }}" value="LIKE" class="inactive game"/>
+                      {% endfor %}
+                  {% endif %}
+                  {% if image["user_id"] != current_user %}
+                      <div style="display:inline;" id="counter{{ image['id'] }}" class="">{{ image["likes"] }}</div>
+                  {% else %}
+                      <div style="display:inline;" id="counter{{ image['id'] }}" class="">Likes: {{ image["likes"] }}</div>
+                  {% endif %}
+                  </div>
+                  <br><br>
+                  <div class="table_outer">
+                    <table id="myTable">
+                          <tr>
+                              <th colspan=3>Comments</th>
+                          </tr>
+                          {% for comment in comments %}
+                          {% if comment['post_id'] == image['id'] %}
+                              <tr>
+                                  {% if comment['user_id'] == current_user %}
+                                      <td><input type="button" class="ton btn btn-danger btn-circle btn-sm" value="X" data-toggle="modal" data-target="#deleteModal{{ comment["id"] }}"/></td>
+                                              <div class="modal fade" id="deleteModal{{ comment["id"] }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                      <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteModalLabel{{ comment["id"] }}">Delete Comment?</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <a href="{{ url_for('delete_comment', comment_id=comment["id"]) }}" class="btn btn-danger">Delete</a>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                  {% else %}
+                                      <td>{{ comment['name'] }}</td>
+                                  {% endif %}
+                                  <td>{{ comment['comment'] }}</td>
+                                  <td>{{ comment['time'] | pretty_date }}</td>
+                              </tr>
+                          {% endif %}
+                          {% endfor %}
+                          <tr colspan=3>
+                              <td colspan=3>
+                                <div class="comment">
+                                    <form method="post" action="/comment/{{ image["id"] }}" id="usrform{{ image["id"] }}">
+                                        <textarea name="comment{{ image["id"] }}" form="usrform{{ image["id"] }}" rows="1" cols"10" placeholder="Enter comment here..."></textarea>
+                                        <br>
+                                        <input type=submit value=Comment>
+                                    </form>
+                                </div>
+                              </td>
+                          </tr>
+                      </table>
+                  </div>
+            </div>
+          </div>
+        <br>
+    {% endfor %}
+    <!--based off of this tutorial https://www.youtube.com/watch?v=Kcka5WBMktw-->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.game').on('click', function() {
+                var post_id = $(this).attr('post_id');
+
+                var action = $(this).attr('value');
+
+            req = $.ajax({
+                url : '/like',
+                type : 'POST',
+                data : { post_id : post_id, action : action }
+            })
+
+            req.done(function(data) {
+
+                $('#counter'+post_id).text(data.likes);
+                if (action === 'UNLIKE') {
+                    $('#update'+post_id).val("LIKE");
+                    $('#update'+post_id).css('background', '#F1F1F1');
+                }
+                else {
+                    $('#update'+post_id).val("UNLIKE");
+                    $('#update'+post_id).css('background', '#EE0000');
+                }
+            })
+
+            })
+        });
+    </script>
+{% endblock %}

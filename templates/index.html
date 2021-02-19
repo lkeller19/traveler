@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Mainpage
+{% endblock %}
+
+{% block main %}
+    <br><br>
+    <div class="bricklayer">
+      {% for country in countries %}
+      <a href="{{ url_for('post', country_name=country) }}">
+        <div class="card box">
+          <img class="card-img-top" src="/static/countries/{{ country }}.jpg" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-text">{{ country }}</h4>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    <script>
+      var bricklayer = new Bricklayer(document.querySelector('.bricklayer'))
+    </script>
+{% endblock %}

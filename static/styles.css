@@ -1,0 +1,279 @@
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+}
+
+main img
+{
+    /* constrain images on small screens */
+    max-width: 100%;
+}
+
+.background {
+  text-align: center;
+  background-image: url('sunset.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+.center {
+    margin: auto;
+}
+
+/* taken from https://stackoverflow.com/questions/22196587/how-to-vertically-center-a-container-in-bootstrap */
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+a {
+    font-size: 24px;
+    font-family: "Times New Roman", Times, serif;
+    color: black;
+}
+
+a:hover {
+    font-weight: bold;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.back {
+  background-image: url("/static/sky.jpg");
+}
+
+.trans {
+    background-color: transparent;
+}
+
+.alert-primary {
+    background-color: transparent;
+}
+
+.white {
+    color: white;
+    font-weight: bold;
+}
+.b {
+    border: 1px solid red;
+    border-radius: 25px;
+    padding: 10px;
+    border-color: red;
+}
+
+.b-error {
+    border: 1px solid red;
+    border-radius: 25px;
+    padding: 10px;
+    border-color: red;
+}
+
+.b-success {
+    border: 1px solid #00EE0E;
+    border-radius: 25px;
+    padding: 10px;
+    border-color: #00EE0E;
+}
+
+.about {
+    font-size: 24px;
+    color: white;
+    border: 3px dashed white;
+    padding: 25px;
+    width: 450px;
+}
+
+.upload {
+    border: 7px ridge #5C99FF;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background-image: url("/static/water.jpeg");
+    background-repeat: no-repeat;
+    background-position: center;
+    align-items: center;
+    /*background-attachment: fixed;*/
+}
+
+.nopost {
+    border: 7px ridge #868686;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    align-items: center;
+    /*background-attachment: fixed;*/
+}
+
+.file {
+    border: 1px solid #D7D7D7;
+    border-radius: 5px;
+    margin-top: -2px;
+    background-color: white;
+}
+
+.like {
+    background: white;
+    border: 1px solid black;
+    border-radius: 75px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    transition: .5s;
+    text-transform: uppercase;
+}
+
+.inactive {
+    color: black;
+    border-radius: 25px;
+    font-family: "Times New Roman", Times, serif;
+    outline: none;
+    background-color: #F1F1F1;
+}
+
+.active {
+    color: black;
+    border-radius: 25px;
+    font-family: "Times New Roman", Times, serif;
+    outline: none;
+    background-color: #EE0000;
+}
+
+.ton {
+    color: black;
+    border-radius: 25px outset #EE0000;
+    font-family: "Times New Roman", Times, serif;
+    outline: none;
+    background-color: #EFEFEF;
+}
+
+textarea {
+    height: 35px;
+    width: 50%;
+    padding: 3px;
+    transition: all 0.5s ease;
+}
+
+.game {
+    color: black;
+}
+
+textarea:focus {
+    height: 6em;
+}
+
+.comment {
+    border: 7px ridge #6f5c5c;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    align-items: center;
+}
+
+.solo {
+    margin: auto;
+    max-width: 30rem;
+}
+
+td {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+table {
+    width: 100%;
+    border: 3px groove black;
+    font-size: 10px;
+    border-collapse: collapse;
+    table-layout:fixed;
+    word-wrap:break-word;
+}
+
+td {
+    border: 2px solid #702C9F;
+}
+
+th {
+    text-align:left;
+    font-size: 20px;
+    border: 2px solid black;
+}
+
+
+.table_outer {
+    height: 12em;
+    overflow-y: auto;
+}
+
+.btn-circle.btn-sm {
+    width: 30px;
+    height: 30px;
+    padding: 0px 0px;
+    border-radius: 15px;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.heart {
+    background-color: transparent;
+    padding: 3px;
+}
+
+@media screen and (min-width: 1200px) {
+  .bricklayer-column-sizer {
+    /* divide by 3. */
+    width: 33.3%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .bricklayer-column-sizer {
+    /* divide by 2. */
+    width: 50%;
+  }
+}
+
+.box {
+  margin: 10px 0;
+}
+
+.uploadimg {
+    border: 3px ridge #5C99FF;
+    margin: auto;
+    max-width: 22rem;
+    max-height: 20rem;
+}
+
+.date {
+    font-size: 16px;
+    font-family: "Times New Roman", Times, serif;
+    color: black;
+}
+
+.user {
+    font-size: 16px;
+}

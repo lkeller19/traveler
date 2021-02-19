@@ -1,0 +1,32 @@
+{% extends "layout3.html" %}
+
+{% block title %}
+    Upload
+{% endblock %}
+
+{% block main %}
+    <br><br>
+    <h1>Upload Image</h1>
+    <br>
+    <div class="upload">
+        {% if get_flashed_messages() %}
+            <div class="text-center black">
+                <span class="b">{{ get_flashed_messages() | join(" ") }}</span>
+            </div>
+            <br>
+        {% endif %}
+        <form method=post enctype=multipart/form-data>
+          <img id="blah" alt="your image" class="uploadimg"/>
+          <br><br>
+          <input type=file name=file class="file" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+          <br><br>
+          <input type=text class=form-control placeholder="Specific Location (i.e. city)" name="location">
+          <br>
+          <input type=text class=form-control placeholder="Country" name="country" list="country-list">
+            <datalist id="country-list">
+            </datalist>
+          <br><br>
+          <input type=submit value=Upload>
+        </form>
+    </div>
+{% endblock %}
